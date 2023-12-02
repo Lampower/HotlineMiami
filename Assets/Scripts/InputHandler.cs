@@ -14,6 +14,8 @@ public class InputHandler : MonoBehaviour
     public bool isReleased { get; private set; }
     public Vector2 mousePos { get; private set; }
 
+    public bool reloadKeyClicked {  get; private set; }
+
     private void Start()
     {
         if (Instance == null)
@@ -31,5 +33,7 @@ public class InputHandler : MonoBehaviour
         isClicked = Input.GetMouseButtonDown(0);
         isReleased = Input.GetMouseButtonUp(0);
         mousePos = Input.mousePosition;
+
+        reloadKeyClicked = Input.GetKeyDown(KeyCode.R);
     }
 }
