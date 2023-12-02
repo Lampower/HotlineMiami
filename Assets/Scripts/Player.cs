@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int speed;
     [SerializeField] private int rotationSpeed;
     [SerializeField] private float distance;
+    [SerializeField] private Vector2 moveDirection;
 
     [SerializeField] private int ammo;
     
@@ -21,15 +22,21 @@ public class Player : MonoBehaviour
 
     [SerializeField] private LayerMask layerMask;
 
+    // Player data
+    Rigidbody2D rb;
+    Sprite sprite;
+
     private void Start()
     {
+        TryGetComponent<Rigidbody2D>(out rb);
+        print(rb.gameObject.name);
         AddPlayer(this);
     }
 
     private void Update()
     {
-        MoveHandler();
-        RotationHandler();
+        moveDirection = InputHandler.Instance.movementVector;
+        
 
         if (weapon != null && InputHandler.Instance.isClicked)
         {
@@ -41,6 +48,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        MoveHandler(moveDirection);
+        RotationHandler();
+    }
+
     private void AddPlayer(Player player)
     {
         if (Players == null)
@@ -50,16 +63,11 @@ public class Player : MonoBehaviour
         Players.Add(player);
     }
 
-    public void MoveHandler()
+    public void MoveHandler(Vector2 vector)
     {
-        
-        Vector2 vector = InputHandler.Instance.movementVector;
-        //if (!IsGoingTo(vector))
-        //{
-        //    transform.position += (Vector3)(vector * speed * Time.deltaTime);
-        //}
-        transform.position += (Vector3)(vector * speed * Time.deltaTime);
-
+        rb.velocity = vector * Time.fixedDeltaTime * speed;
+        //rb?.MovePosition((Vector2)transform.position + vector * Time.fixedDeltaTime * speed);
+        //print(rb.velocity);
     }
 
     public void RotationHandler()
@@ -67,7 +75,7 @@ public class Player : MonoBehaviour
         Vector2 mousePos = followCamera.ScreenToWorldPoint(InputHandler.Instance.mousePos);
         Vector2 rotateTowardsVec = mousePos - (Vector2)transform.position;
         Quaternion rotateTowardsQuaternion = Quaternion.LookRotation(transform.forward, rotateTowardsVec);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateTowardsQuaternion, rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateTowardsQuaternion, rotationSpeed * Time.fixedDeltaTime);
     }
 
     public bool IsGoingTo(Vector2 moveVector)
@@ -79,6 +87,6 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print(collision.collider);
+        
     }
 }
