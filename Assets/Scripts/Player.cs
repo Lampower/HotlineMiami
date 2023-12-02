@@ -11,12 +11,16 @@ public class Player : MonoBehaviour
 
     [SerializeField] private int speed;
     [SerializeField] private int rotationSpeed;
+    [SerializeField] private float distance;
 
     [SerializeField] private int ammo;
-
+    
     [SerializeField] public static List<Player> Players { get; private set; }
 
     public Weapon weapon;
+
+    [SerializeField] private LayerMask layerMask;
+
     private void Start()
     {
         AddPlayer(this);
@@ -50,8 +54,12 @@ public class Player : MonoBehaviour
     {
         
         Vector2 vector = InputHandler.Instance.movementVector;
-
+        //if (!IsGoingTo(vector))
+        //{
+        //    transform.position += (Vector3)(vector * speed * Time.deltaTime);
+        //}
         transform.position += (Vector3)(vector * speed * Time.deltaTime);
+
     }
 
     public void RotationHandler()
@@ -62,12 +70,15 @@ public class Player : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateTowardsQuaternion, rotationSpeed * Time.deltaTime);
     }
 
-    public bool isGoingTo()
+    public bool IsGoingTo(Vector2 moveVector)
     {
-        RaycastHit2D hit;
-        return false;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, moveVector, distance, layerMask);
+        if (hit.collider == null) return false;
+        return true;
     }
 
-
-    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        print(collision.collider);
+    }
 }

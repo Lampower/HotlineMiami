@@ -508,7 +508,7 @@ MonoBehaviour:
   healthPoints: 5
   damage: 1
   speed: 5
-  rotationSpeed: 50
+  rotationSpeed: 500
   ammo: 10
   weapon: {fileID: 0}
 --- !u!1 &1852591162
