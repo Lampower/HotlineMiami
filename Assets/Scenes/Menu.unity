@@ -510,7 +510,7 @@ MonoBehaviour:
   followCamera: {fileID: 1061180259}
   healthPoints: 5
   damage: 1
-  speed: 5
+  speed: 100
   rotationSpeed: 500
   distance: 0
   moveDirection: {x: 0, y: 0}
@@ -527,14 +527,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329841063}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -545,7 +545,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &1835361824
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,6 +775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 1852591162}
   bulletPrefab: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &1915047385
 GameObject:
   m_ObjectHideFlags: 0
