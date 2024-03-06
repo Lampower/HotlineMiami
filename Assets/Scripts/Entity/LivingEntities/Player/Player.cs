@@ -33,7 +33,7 @@ public class Player : AbstractEntity, IFireable, IInteractable, IMoveable, IDama
             Fire();
         }
     }
-    public void ApplyDamage(AbstractEntity sender, int damage)
+    public void ApplyDamage(IFireable sender, int damage)
     {
         EntityGetDamageEvent evt = new EntityGetDamageEvent(
             damage,
@@ -43,13 +43,15 @@ public class Player : AbstractEntity, IFireable, IInteractable, IMoveable, IDama
             );
 
         EntityGetDamageEvent.OnEntityDamage?.Invoke(evt);
+
+        print($"{sender} Damaged {this}");
     }
 
     public void Fire()
     {
         Vector2 _direction = (InputHandler.Instance.mousePosOnScene - (Vector2)transform.position).normalized;
         GameObject bullet = Instantiate(_bullet);
-        bullet.GetComponent<Bullet>().Init(_weaponPivot, _direction, 25);
+        bullet.GetComponent<Bullet>().Init(_weaponPivot, _direction, 25, this);
     }
     public override void Interact(IInteractable interactingObject)
     {

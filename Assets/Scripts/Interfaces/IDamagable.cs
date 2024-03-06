@@ -8,6 +8,6 @@ namespace Assets.Scripts.Interfaces
 {
     public interface IDamagable
     {
-        public void ApplyDamage(AbstractEntity sender, int damage);
+        public void ApplyDamage(IFireable shooter, int damage);
     }
 }

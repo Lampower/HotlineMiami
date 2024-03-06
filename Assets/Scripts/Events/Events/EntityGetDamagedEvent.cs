@@ -9,20 +9,20 @@ namespace Assets.Scripts.Events.Events
 
         public int damage { get; }
         public IDamagable hittedObject { get; }
-        public AbstractEntity hitObject { get; }
+        public IFireable shooter { get; }
         public Vector3 positionOfHit { get; }
 
         public EntityGetDamageEvent(
             int damage,
             IDamagable hittedObject,
-            AbstractEntity hitObject,
+            IFireable shooter,
             Vector3 positionOfHit
 
             )
         {
             this.damage = damage;
             this.hittedObject = hittedObject;
-            this.hitObject = hitObject;
+            this.shooter = shooter;
             this.positionOfHit = positionOfHit;
         }
     }

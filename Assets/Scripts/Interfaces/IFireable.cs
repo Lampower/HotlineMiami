@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Interfaces
 {
-    internal interface IFireable
+    public interface IFireable
     {
         public void Fire();
     }
