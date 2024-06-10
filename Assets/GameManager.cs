@@ -4,30 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    // Start is called before the first frame upda
+    public GameObject go;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
-    }
-
-    void MoveAll()
-    {
-        foreach (var moveable in MoveComponent.moveables)
-        {
-            moveable.Move();
-        }
-    }
-
-    void RotateAll()
-    {
-        foreach (var rotateable in RotationComponent.rotatables)
-        {
-            rotateable.Rotate();
-        }
     }
 }

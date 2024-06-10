@@ -405,7 +405,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1293417644}
   - component: {fileID: 1293417646}
-  - component: {fileID: 1293417645}
   - component: {fileID: 1293417647}
   m_Layer: 0
   m_Name: GameManager
@@ -429,19 +428,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1293417645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1293417643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c19167c0c8155a4193302cbb4881c4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputs: []
 --- !u!114 &1293417646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,6 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3eff310f29b73347aba13586b9cddba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  go: {fileID: 1329841063}
 --- !u!114 &1293417647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,10 +450,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1293417643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a9bd55d2aa38ca419e42bc3342202fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 3939a44369e53674aab65cee592e5254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveComponents: []
+  isAttacking: 0
 --- !u!1 &1329841063
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +468,7 @@ GameObject:
   - component: {fileID: 1329841068}
   - component: {fileID: 1329841070}
   - component: {fileID: 1329841069}
+  - component: {fileID: 1329841071}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -627,11 +615,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1329841063}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db4df73af2a77cc45a5c2882859d2ee7, type: 3}
+  m_Script: {fileID: 11500000, guid: 05628c23723a6ab4986b1183a7df8fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMoving: 0
-  direction: {x: 0, y: 0, z: 0}
+  speedInDegreesPerSecond: 1000
 --- !u!114 &1329841070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,13 +628,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1329841063}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 827552d3da82a6c458c9d6daa8343838, type: 3}
+  m_Script: {fileID: 11500000, guid: d31da37c13c5ccd4aa55d8c2726d58bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  direction: {x: 0, y: 0, z: 0}
   rb: {fileID: 1329841067}
-  input: {fileID: 1329841069}
+  speed: 15
+--- !u!114 &1329841071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329841063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af19240a2557b004e804fb230605dcd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 1
 --- !u!1 &1835361824
 GameObject:
   m_ObjectHideFlags: 0
