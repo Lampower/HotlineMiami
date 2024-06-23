@@ -8,15 +8,20 @@ public class BulletComponent: EcsComponent
     public float bulletSpeed = 5;
     public float time2live = 2;
 
-    public BoxCollider2D collider;
     public Rigidbody2D rb;
 
-    private void Start()
+    private void OnEnable()
     {
-        StartCoroutine(DestroyBulletTime());
+    }
+   
+    public void StartFly()
+    {
         rb.AddForce(transform.up * bulletSpeed, ForceMode2D.Impulse);
     }
-    
+    public void StartDestroyBulletOverTime()
+    {
+        StartCoroutine(DestroyBulletTime());
+    }
 
     private void Update()
     {
@@ -32,6 +37,11 @@ public class BulletComponent: EcsComponent
     {
         yield return new WaitForSeconds(time2live);
         DestroyBullet();
+    }
+    IEnumerator StopFly()
+    {
+        yield return new WaitForSeconds(time2live);
+        rb.AddForce(Vector3.zero);
     }
 
     void DestroyBullet()

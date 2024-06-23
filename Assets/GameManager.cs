@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame upda
-    public GameObject go;
+    public static GameManager Instance;
 
+    public GameObject Entities;
+    public GameObject World;
     private void Start()
     {
+        if (Instance == null) Instance = this;
     }
 }

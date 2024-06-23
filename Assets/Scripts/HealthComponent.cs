@@ -1,6 +1,6 @@
 
 
-public class LiveComponent : EcsComponent
+public class HealthComponent : EcsComponent
 {
     public int health = 1;
     public bool IsDead()

@@ -16,6 +16,9 @@ public class WeaponComponent: EcsComponent
     {
         GameObject bullet = Instantiate(bulletPrefab);
         bullet.transform.SetPositionAndRotation(WeaponPivot.position, WeaponPivot.rotation);
+        var bulletComponent = bullet.GetComponent<BulletComponent>();
+        bulletComponent.StartFly();
+        bulletComponent.StartDestroyBulletOverTime();
     }
 
     public void SetCooldownToZero() => cooldown = 0;

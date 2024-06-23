@@ -2,27 +2,16 @@
 
 
 
+using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mail;
 using UnityEngine;
 
 public class DamageDealComponent : EcsComponent
 {
     public int damageByHand = 1;
     public WeaponComponent weapon;
-    public WeaponComponent Weapon { 
-        get 
-        { return weapon; } 
-        set 
-        {
-            if (value != null)
-            {
-                timeBetweenAttacks = value.timeBetweenAttacks;
-            }
-            else timeBetweenAttacks = timeBetweenMeleeAttacks;
-
-            weapon = value;
-        } 
-    }
+    public Transform weaponPosition;
 
     public Collider2D HandCollider;
     public RaycastHit2D[] colliders = new RaycastHit2D[0];
@@ -66,7 +55,7 @@ public class DamageDealComponent : EcsComponent
         Debug.Log(colliders.Length);
         foreach (var entity in colliders)
         {
-            if (entity.collider.TryGetComponent<LiveComponent>(out LiveComponent entityHp))
+            if (entity.collider.TryGetComponent<HealthComponent>(out HealthComponent entityHp))
             {
                 entityHp.DealDamage(damageByHand);
             }
@@ -74,4 +63,40 @@ public class DamageDealComponent : EcsComponent
     }
     public void SetCooldownToZero() => cooldown = 0;
 
+    public void SetWeapon(WeaponComponent weapon)
+    {
+        if (this.weapon != null)
+        {
+            //trow weapon
+            //and take new one
+            ThrowWeapon();
+            return;
+        }
+        if (weapon != null)
+        {
+            timeBetweenAttacks = weapon.timeBetweenAttacks;
+        }
+        else timeBetweenAttacks = timeBetweenMeleeAttacks;
+
+        this.weapon = weapon;
+        this.weapon.transform.SetParent(weaponPosition);
+        this.weapon.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity );
+    }
+    public void ThrowWeapon()
+    {
+        if (weapon == null) return;
+        GameObject weaponObject = weapon.gameObject;
+
+        weaponObject.transform.SetParent(GameManager.Instance.World.transform);
+
+        var rb = weaponObject.AddComponent<Rigidbody2D>();
+        var bc = weaponObject.AddComponent<BulletComponent>();
+        bc.rb = rb;
+        bc.bulletSpeed = 5;
+        bc.StartFly();
+
+
+        weapon = null;
+        // sadly weapon will be destroyed on throw
+    }
 }
