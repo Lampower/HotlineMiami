@@ -10,20 +10,23 @@ namespace Events
         public static Action<HitEntityEvent> OnHitEntity;
         public static Action<WeaponPickupEvent> OnWeaponPickup;
     }
-    public class HitEntityEvent
+
+    public class Event
+    {
+        public bool isCancelled = false;
+    }
+    public class HitEntityEvent: Event
     {
         public GameObject sender;
         public GameObject hittedObject;
         public GameObject weaponHitted;
     }
-    public class EntityDiesEvent
+    public class EntityDiesEvent: Event
     {
         GameObject entity;
     }
 
-    public class WeaponPickupEvent
+    public class WeaponPickupEvent: Event
     {
-        public DamageDealComponent holder;
-        public WeaponComponent weapon;
     }
 }
